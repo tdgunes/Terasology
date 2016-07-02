@@ -84,7 +84,7 @@ public class DirectionalLightsNode implements Node {
 
     @Override
     public void process() {
-        PerformanceMonitor.startActivity("rendering/directionallights");
+        PerformanceMonitor.startActivity("rendering/directionalLights");
         sceneOpaque.bind();
 
         Vector3f sunlightWorldPosition = new Vector3f(backdropProvider.getSunDirection(true));
