@@ -36,30 +36,30 @@ import org.terasology.rendering.backdrop.BackdropProvider;
 import org.terasology.rendering.cameras.Camera;
 import org.terasology.rendering.cameras.OculusStereoCamera;
 import org.terasology.rendering.cameras.PerspectiveCamera;
-import org.terasology.rendering.dag.AmbientOcclusionPassesNode;
-import org.terasology.rendering.dag.BackdropNode;
-import org.terasology.rendering.dag.BloomPassesNode;
-import org.terasology.rendering.dag.BlurPassesNode;
-import org.terasology.rendering.dag.ChunksAlphaRejectNode;
-import org.terasology.rendering.dag.ChunksOpaqueNode;
-import org.terasology.rendering.dag.ChunksRefractiveReflectiveNode;
-import org.terasology.rendering.dag.DirectionalLightsNode;
-import org.terasology.rendering.dag.DownSampleSceneAndUpdateExposureNode;
-import org.terasology.rendering.dag.FinalPostProcessingNode;
-import org.terasology.rendering.dag.FirstPersonViewNode;
-import org.terasology.rendering.dag.InitialPostProcessingNode;
-import org.terasology.rendering.dag.LightGeometryNode;
-import org.terasology.rendering.dag.LightShaftsNode;
+import org.terasology.rendering.dag.nodes.AmbientOcclusionPassesNode;
+import org.terasology.rendering.dag.nodes.BackdropNode;
+import org.terasology.rendering.dag.nodes.BloomPassesNode;
+import org.terasology.rendering.dag.nodes.BlurPassesNode;
+import org.terasology.rendering.dag.nodes.ChunksAlphaRejectNode;
+import org.terasology.rendering.dag.nodes.ChunksOpaqueNode;
+import org.terasology.rendering.dag.nodes.ChunksRefractiveReflectiveNode;
+import org.terasology.rendering.dag.nodes.DirectionalLightsNode;
+import org.terasology.rendering.dag.nodes.DownSampleSceneAndUpdateExposureNode;
+import org.terasology.rendering.dag.nodes.FinalPostProcessingNode;
+import org.terasology.rendering.dag.nodes.FirstPersonViewNode;
+import org.terasology.rendering.dag.nodes.InitialPostProcessingNode;
+import org.terasology.rendering.dag.nodes.LightGeometryNode;
+import org.terasology.rendering.dag.nodes.LightShaftsNode;
 import org.terasology.rendering.dag.Node;
-import org.terasology.rendering.dag.ObjectsOpaqueNode;
-import org.terasology.rendering.dag.OutlineNode;
-import org.terasology.rendering.dag.OverlaysNode;
-import org.terasology.rendering.dag.PrePostCompositeNode;
-import org.terasology.rendering.dag.ShadowMapNode;
-import org.terasology.rendering.dag.SimpleBlendMaterialsNode;
-import org.terasology.rendering.dag.SkyBandsNode;
-import org.terasology.rendering.dag.ToneMappingNode;
-import org.terasology.rendering.dag.WorldReflectionNode;
+import org.terasology.rendering.dag.nodes.ObjectsOpaqueNode;
+import org.terasology.rendering.dag.nodes.OutlineNode;
+import org.terasology.rendering.dag.nodes.OverlaysNode;
+import org.terasology.rendering.dag.nodes.PrePostCompositeNode;
+import org.terasology.rendering.dag.nodes.ShadowMapNode;
+import org.terasology.rendering.dag.nodes.SimpleBlendMaterialsNode;
+import org.terasology.rendering.dag.nodes.SkyBandsNode;
+import org.terasology.rendering.dag.nodes.ToneMappingNode;
+import org.terasology.rendering.dag.nodes.WorldReflectionNode;
 import org.terasology.rendering.logic.LightComponent;
 import org.terasology.rendering.opengl.FrameBuffersManager;
 import org.terasology.rendering.opengl.GraphicState;
@@ -251,6 +251,7 @@ public final class WorldRendererImpl implements WorldRenderer {
         renderGraph.add(finalPostProcessingNode);
     }
 
+    // TODO: Remove this method
     private static <T extends Node> T createInstance(Class<T> type, Context context) {
         // Attempt constructor-based injection first
         T node = InjectionHelper.createWithConstructorInjection(type, context);
