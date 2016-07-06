@@ -15,9 +15,6 @@
  */
 package org.terasology.rendering.dag;
 
-public interface Node {
-
+public interface Node extends PipelineTask {
     void initialise();
-
-    void process();
 }

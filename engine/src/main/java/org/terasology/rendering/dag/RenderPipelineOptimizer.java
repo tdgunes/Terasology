@@ -18,6 +18,15 @@ package org.terasology.rendering.dag;
 /**
  *
  */
-public interface RenderPipelineOptimizer {
-    void optimize(Pipeline pipeline);
+public class RenderPipelineOptimizer {
+
+    private RenderPipeline renderPipeline;
+
+    public RenderPipelineOptimizer(RenderPipeline renderPipeline) {
+        this.renderPipeline = renderPipeline;
+    }
+
+    public void optimize() {
+        // TODO: redundant state elimination here
+    }
 }

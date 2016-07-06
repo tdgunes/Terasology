@@ -18,17 +18,6 @@ package org.terasology.rendering.dag;
 /**
  *
  */
-public class RenderPipelineProcessor { // TODO: how about RenderPipelineRunner? (running tasks?)
-    private RenderPipeline pipeline;
+public interface StateChange {
 
-    public RenderPipelineProcessor(RenderGraph renderGraph) {
-        RenderPipelineGenerator generator = new RenderPipelineGenerator(renderGraph);
-        pipeline = generator.generate();
-        RenderPipelineOptimizer optimizer = new RenderPipelineOptimizer(pipeline);
-        optimizer.optimize();
-    }
-
-    public void processAll() {
-        pipeline.forEach(PipelineTask::process);
-    }
 }

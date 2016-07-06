@@ -16,7 +16,8 @@
 package org.terasology.rendering.dag;
 
 /**
- * Created by tdgunes on 05/07/16.
+ *
  */
-public interface Pipeline {
+public interface PipelineTask {
+    void process();
 }

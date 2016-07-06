@@ -15,9 +15,28 @@
  */
 package org.terasology.rendering.dag;
 
+import com.google.common.collect.Lists;
+import java.util.List;
+
 /**
  *
  */
-public interface RenderPipelineGenerator {
-    Pipeline generate(RenderGraph renderGraph);
+public class RenderPipelineGenerator {
+    private RenderGraph renderGraph;
+
+    public RenderPipelineGenerator(RenderGraph renderGraph) {
+        this.renderGraph = renderGraph;
+    }
+
+    public RenderPipeline generate() {
+        List<PipelineTask> tasks = Lists.newArrayList();
+        List<Node> nodes = renderGraph.getNodesInTopologicalOrder();
+
+        for (Node node : nodes) {
+            // TODO: convert node.getDesiredStateChanges() to associated PipelineTask and add to "tasks" here
+            tasks.add(node);
+        }
+
+        return new RenderPipeline(tasks);
+    }
 }

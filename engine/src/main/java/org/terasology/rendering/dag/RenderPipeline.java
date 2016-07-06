@@ -15,20 +15,15 @@
  */
 package org.terasology.rendering.dag;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  */
-public class RenderPipelineProcessor { // TODO: how about RenderPipelineRunner? (running tasks?)
-    private RenderPipeline pipeline;
+public class RenderPipeline extends ArrayList<PipelineTask> { // TODO: can be changed, just for convenience
 
-    public RenderPipelineProcessor(RenderGraph renderGraph) {
-        RenderPipelineGenerator generator = new RenderPipelineGenerator(renderGraph);
-        pipeline = generator.generate();
-        RenderPipelineOptimizer optimizer = new RenderPipelineOptimizer(pipeline);
-        optimizer.optimize();
-    }
-
-    public void processAll() {
-        pipeline.forEach(PipelineTask::process);
+    public RenderPipeline(List<PipelineTask> tasks) {
+        addAll(tasks);
     }
 }

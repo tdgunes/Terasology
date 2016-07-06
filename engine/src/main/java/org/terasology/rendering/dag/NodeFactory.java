@@ -22,7 +22,14 @@ import org.terasology.registry.InjectionHelper;
  *
  */
 public class NodeFactory {
-    public static <T extends Node> T create(Class<T> type, Context context) {
+
+    private Context context;
+
+    public NodeFactory(Context context) {
+        this.context = context;
+    }
+
+    public <T extends Node> T createInstance(Class<T> type) {
         // Attempt constructor-based injection first
         T node = InjectionHelper.createWithConstructorInjection(type, context);
         // Then fill @In fields
