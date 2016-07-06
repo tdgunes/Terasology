@@ -19,5 +19,5 @@ package org.terasology.rendering.dag;
  *
  */
 public interface RenderPipelineProcessor {
-    void process();
+    void processAll();
 }
