@@ -25,6 +25,7 @@ import org.terasology.registry.In;
 import org.terasology.rendering.assets.material.Material;
 import org.terasology.rendering.dag.AbstractNode;
 import org.terasology.rendering.oculusVr.OculusVrHelper;
+import org.terasology.rendering.opengl.Dimensions;
 import org.terasology.rendering.opengl.FBO;
 import org.terasology.rendering.opengl.FrameBuffersManager;
 import org.terasology.rendering.opengl.PostProcessor;
@@ -58,7 +59,7 @@ public class FinalPostProcessingNode extends AbstractNode {
     private RenderingDebugConfig renderingDebugConfig;
     private RenderingConfig renderingConfig;
 
-    private FBO.Dimensions fullScale;
+    private Dimensions fullScale;
 
     private Material finalPost;
     private Material debug;

@@ -229,14 +229,14 @@ public final class FBO {
      * @return Returns the (int) width of the FrameBuffer, in pixels.
      */
     public int width() {
-        return this.dimensions.width;
+        return this.dimensions.width();
     }
 
     /**
      * @return Returns the (int) height of the FrameBuffer, in pixels.
      */
     public int height() {
-        return this.dimensions.height;
+        return this.dimensions.height();
     }
 
     /**
@@ -304,7 +304,7 @@ public final class FBO {
      */
     public static FBO create(String title, Dimensions dimensions, Type type,
                              boolean useDepthBuffer, boolean useNormalBuffer, boolean useLightBuffer, boolean useStencilBuffer) {
-        FBO fbo = new FBO(dimensions.width, dimensions.height);
+        FBO fbo = new FBO(dimensions.width(), dimensions.height());
 
         // Create the FBO on the GPU
         fbo.fboId = glGenFramebuffersEXT();
@@ -473,9 +473,9 @@ public final class FBO {
         glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, fbo.depthStencilRboId);
 
         if (!useStencilBuffer) {
-            glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL14.GL_DEPTH_COMPONENT24, fbo.dimensions.width, fbo.dimensions.height);
+            glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL14.GL_DEPTH_COMPONENT24, fbo.dimensions.width(), fbo.dimensions.height());
         } else {
-            glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, EXTPackedDepthStencil.GL_DEPTH24_STENCIL8_EXT, fbo.dimensions.width, fbo.dimensions.height);
+            glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, EXTPackedDepthStencil.GL_DEPTH24_STENCIL8_EXT, fbo.dimensions.width(), fbo.dimensions.height());
         }
 
         glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
@@ -496,88 +496,7 @@ public final class FBO {
     }
 
     private static void allocateTexture(Dimensions dimensions, int internalFormat, int dataFormat, int dataType) {
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, internalFormat, dimensions.width, dimensions.height, 0, dataFormat, dataType, (ByteBuffer) null);
-    }
-
-    /**
-     * Support class wrapping width and height of FBOs. Also provides some ad-hoc methods to make code more readable.
-     */
-    public static class Dimensions {
-        private int width;
-        private int height;
-
-        /**
-         * Standard Constructor - returns a Dimensions object.
-         *
-         * @param width An integer, representing the width of the FBO in pixels.
-         * @param height An integer, representing the height of the FBO in pixels.
-         */
-        public Dimensions(int width, int height) {
-            this.width = width;
-            this.height = height;
-        }
-
-        /**
-         * Returns a new Dimensions object whose width and height have been divided by the divisor.
-         * I.e. new Dimensions(20,10).dividedBy(2) returns a Dimensions(10,5) object.
-         * @param divisor An integer.
-         * @return a new Dimensions object.
-         */
-        public Dimensions dividedBy(int divisor) {
-            return new Dimensions(width / divisor, height / divisor);
-        }
-
-        /**
-         * Multiplies (in place) both width and height of this Dimensions object by multiplier.
-         * @param multiplier A float representing a multiplication factor.
-         */
-        public void multiplySelfBy(float multiplier) {
-            width  *= multiplier;
-            height *= multiplier;
-        }
-
-        /**
-         * Returns true if the other instance of this class is null or has different width/height.
-         * Similar to the more standard equals(), doesn't bother with checking if -other- is an instance
-         * of Dimensions. It also makes for more readable code, i.e.:
-         *
-         * newDimensions.areDifferentFrom(oldDimensions)
-         *
-         * @param other A Dimensions object
-         * @return True if the two objects are different as defined above.
-         */
-        public boolean areDifferentFrom(Dimensions other) {
-            return other == null || this.width != other.width || this.height != other.height;
-        }
-
-        /**
-         * Identical in behaviour to areDifferentFrom(Dimensions other),
-         * in some situation can be more semantically appropriate, i.e.:
-         *
-         * newResolution.isDifferentFrom(oldResolution);
-         *
-         * @param other A Dimensions object.
-         * @return True if the two objects are different as defined in the javadoc for areDifferentFrom(other).
-         */
-        public boolean isDifferentFrom(Dimensions other) {
-            return areDifferentFrom(other);
-        }
-
-        /**
-         * Returns the width.
-         * @return An integer representing the width stored in the Dimensions instance.
-         */
-        public int width() {
-            return this.width;
-        }
-
-        /**
-         * Returns the height.
-         * @return An integer representing the height stored in the Dimensions instance.
-         */
-        public int height() {
-            return this.height;
-        }
+        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, internalFormat, dimensions.width(), dimensions.height(), 0, dataFormat, dataType, (ByteBuffer) null);
     }
 }
 

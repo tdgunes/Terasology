@@ -21,6 +21,8 @@ import com.google.common.collect.Sets;
 
 import java.util.List;
 import java.util.Set;
+import org.terasology.rendering.opengl.FBOManager;
+import org.terasology.rendering.opengl.FrameBuffersManager;
 
 /**
  * TODO: Add javadocs
@@ -34,6 +36,13 @@ public abstract class AbstractNode implements Node {
     protected AbstractNode() {
         desiredStateChanges = Sets.newLinkedHashSet();
         rangeList = Lists.newArrayList();
+    }
+
+    // TODO: remove FrameBuffersManager from here
+    protected void requireFBO(FrameBuffersManager frameBuffersManager, String identifier, FBOManager fboManager) {
+        if (!frameBuffersManager.isFBOAvailable(identifier)) {
+            frameBuffersManager.addDynamicFBO(identifier, fboManager);
+        }
     }
 
     protected boolean addDesiredStateChange(StateChange stateChange) {
